@@ -10,10 +10,11 @@ import notes from "../routes/note.routes.js"
 
 const app = express();
 
+const allowedOrigin = ["http://localhost:5173", "https://cloudesk.vercel.app"];
 app.use(cors({
-    origin: true,
+    origin: allowedOrigin,
     credentials: true
-}));
+}))
 
 app.use(express.json());
 app.use(cookieParser());
