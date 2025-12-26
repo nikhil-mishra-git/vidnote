@@ -10,7 +10,7 @@ import notes from "../routes/note.routes.js"
 
 const app = express();
 
-const allowedOrigin = ["http://localhost:5173", "https://cloudesk.vercel.app"];
+const allowedOrigin = ["http://localhost:5173", "https://vidnoteai.vercel.app"];
 app.use(cors({
     origin: allowedOrigin,
     credentials: true
