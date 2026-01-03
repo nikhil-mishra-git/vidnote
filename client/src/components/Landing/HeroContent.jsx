@@ -1,8 +1,16 @@
 import React from "react";
 import { IoIosPlay } from "react-icons/io";
 import { FiSend } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const HeroContent = () => {
+
+    const navigate = useNavigate();
+
+    const gotoLogin = () => {
+        navigate("/login");
+    }
+
     return (
         <div className="py-5 min-h-[70vh] flex flex-col items-center justify-center text-center flex-1 px-4 md:px-0">
 
@@ -27,7 +35,9 @@ const HeroContent = () => {
                     placeholder="Paste Youtube URL here..."
                 />
 
-                <button className="w-[70%] mx-auto sm:w-1/3 flex items-center justify-center gap-2 bg-[#24cfa6] hover:bg-[#1dab86] cursor-pointer text-black font-medium px-6 py-3 rounded-md transition">
+                <button
+                onClick={gotoLogin}
+                className="w-[70%] mx-auto sm:w-1/3 flex items-center justify-center gap-2 bg-[#24cfa6] hover:bg-[#1dab86] cursor-pointer text-black font-medium px-6 py-3 rounded-md transition">
                     <FiSend size={18} />
                     Generate Notes
                 </button>

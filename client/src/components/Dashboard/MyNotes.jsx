@@ -12,7 +12,7 @@ const MyNotes = () => {
     const fetchNotes = async () => {
       try {
         const data = await getAllNotes();
-        
+
         setNotes(data.notes || data);
       } catch (err) {
         console.error(err);
@@ -31,6 +31,8 @@ const MyNotes = () => {
         Manage your processed videos and notes
       </p>
 
+
+
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 
         {/* Loading Skeleton */}
@@ -44,12 +46,12 @@ const MyNotes = () => {
           notes.map((note) => (
             <VideoCard key={note._id} note={note} />
           ))}
-
-        {/* Empty State */}
-        {!loading && notes.length === 0 && <EmptyNotes />}
-
-
       </div>
+
+      {/* Empty State */}
+      {!loading && notes.length === 0 && <EmptyNotes />}
+
+
     </div>
   );
 };

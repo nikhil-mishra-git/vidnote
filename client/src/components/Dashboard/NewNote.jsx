@@ -69,6 +69,7 @@ const NewVideo = () => {
 
         } catch (error) {
             clearInterval(interval);
+            toast.dismiss();
             toast.error("Something went wrong");
 
             setIsProcessing(false);
@@ -89,7 +90,7 @@ const NewVideo = () => {
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-3">
                         Create New <span className="text-[#24cfa6]">AI Note</span>
                     </h1>
-                    <p className="text-zinc-400 text-sm md:text-base">
+                    <p className="hidden md:block text-zinc-400 text-sm md:text-base">
                         Paste a YouTube link to generate notes, flashcards, and quizzes
                     </p>
                 </div>
@@ -106,7 +107,7 @@ const NewVideo = () => {
                     <div className="flex flex-col md:flex-row w-full gap-3 md:gap-4">
 
                         {/* INPUT BOX */}
-                        <div className="w-full md:w-3/5 flex items-center gap-3 px-3 md:px-4 py-3 md:py-5 bg-black/50 border border-zinc-700 rounded-lg">
+                        <div className="w-full md:w-3/5 flex items-center gap-3 px-3 md:px-4 py-3 md:py-4 bg-black/50 border border-zinc-700 rounded-lg">
                             <FiLink className="text-white" />
                             <input
                                 value={url}
@@ -229,15 +230,15 @@ const NewVideo = () => {
 
                 {/* Features */}
                 {!isProcessing && (
-                    <div className="mt-6 md:mt-8">
+                    <div className="mt-10 md:mt-8">
                         <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4 flex items-center gap-2">
                             <FiCheckCircle className="text-[#24cfa6]" />
                             What you'll get:
                         </h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 md:gap-3">
                             <div className="flex items-center gap-3 p-2 md:p-3 bg-zinc-800/30 rounded-lg">
                                 <FiBookOpen className="text-[#24cfa6] " />
-                                <span className="text-xs md:text-sm">Comprehensive Notes</span>
+                                <span className="text-xs md:text-sm">Notes</span>
                             </div>
                             <div className="flex items-center gap-3 p-2 md:p-3 bg-zinc-800/30 rounded-lg">
                                 <FiCopy className="text-[#24cfa6] " />
@@ -245,7 +246,7 @@ const NewVideo = () => {
                             </div>
                             <div className="flex items-center gap-3 p-2 md:p-3 bg-zinc-800/30 rounded-lg">
                                 <FiBook className="text-[#24cfa6] " />
-                                <span className="text-xs md:text-sm">Quiz Questions</span>
+                                <span className="text-xs md:text-sm">MCQ Questions</span>
                             </div>
                             <div className="flex items-center gap-3 p-2 md:p-3 bg-zinc-800/30 rounded-lg">
                                 <FiFileText className="text-[#24cfa6] " />

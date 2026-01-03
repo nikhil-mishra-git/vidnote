@@ -1,33 +1,29 @@
 import { MdOutlineNoteAdd } from "react-icons/md";
+import { HiOutlineDocumentText } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import AnimateSvg from "../utils/Push notifications.gif";
 
 const EmptyNotes = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="col-span-full flex flex-col md:flex-row items-center justify-center gap-10 py-20 px-4 text-center md:text-left">
+    <div className="relative col-span-full flex flex-col items-center justify-center gap-6 py-14 px-4 text-center">
 
-      {/* Image */}
-      <img
-        src={AnimateSvg}
-        alt="No notes"
-        className="w-64 sm:w-72 md:w-80 opacity-90"
-      />
+      <div className="absolute z-0 bottom-5 left-30 md:left-130 w-[200px] md:w-[320px] h-[120px] md:h-[220px] bg-[#24cfa6]/20 blur-[80px] md:blur-[100px] rounded-full"></div>
 
-      {/* Content */}
-      <div className="max-w-md">
+      <div>
+        <HiOutlineDocumentText className="w-12 h-12 text-zinc-400 my-6 mx-auto" />
+
         <h3 className="text-2xl font-semibold mb-2">
-          Oops! No notes found
+          No notes yet
         </h3>
 
         <p className="text-zinc-400 mb-6">
-          You haven’t created any notes yet. 
+          Create your first note from a YouTube video.
         </p>
 
         <button
           onClick={() => navigate("/dashboard/new-note")}
-          className="inline-flex items-center gap-2 bg-[#24cfa6] text-black px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition"
+          className="inline-flex items-center gap-2 bg-[#24cfa6] text-black px-6 py-3 rounded-full text-sm hover:opacity-90 transition"
         >
           <MdOutlineNoteAdd size={18} />
           Create New Note

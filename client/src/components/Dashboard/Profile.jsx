@@ -54,8 +54,9 @@ const Profile = () => {
     try {
       const res = await deleteAccount();
       if (res?.success) {
+        dispatch(clearAuth());
         toast.success(res.message);
-        navigate("/");
+        navigate("/", { replace: true });
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Delete failed");
@@ -68,7 +69,7 @@ const Profile = () => {
     <div className="min-h-screen w-full md:px-6 py-6 font-mono text-white">
 
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10">
         <div>
           <h1 className="text-3xl font-semibold">Profile Settings</h1>
           <p className="text-gray-400 text-sm">
@@ -78,7 +79,7 @@ const Profile = () => {
 
         <button
           onClick={onLogout}
-          className="flex items-center gap-2 bg-red-600/20 border border-red-600/40 px-4 py-2 rounded-lg text-sm hover:bg-red-600/30 transition"
+          className="flex ml-[72%] mt-3 md:mt-0 md:ml-0 items-center gap-2 bg-red-600/20 border border-red-600/40 px-4 py-2 rounded-lg text-sm hover:bg-red-600/30 transition"
         >
           <FiLogOut className="text-red-400" />
           Logout
@@ -98,9 +99,9 @@ const Profile = () => {
                 alt="avatar"
                 className="rounded-full border border-white/10"
               />
-              <div className="absolute bottom-0 right-0 bg-black/80 p-1.5 rounded-full">
+              {/* <div className="absolute bottom-0 right-0 bg-black/80 p-1.5 rounded-full">
                 <FiCamera className="text-white text-sm" />
-              </div>
+              </div> */}
             </div>
 
             <div>
@@ -174,14 +175,14 @@ const Profile = () => {
           <FiTrash2 /> Danger Zone
         </h2>
 
-        <div className="flex justify-between mt-8">
+        <div className="flex flex-col md:flex-row justify-between mt-8">
           <p className="text-gray-400 text-sm">
             Permanently delete your account and all data
           </p>
 
           <button
             onClick={() => setConfirmOpen(true)}
-            className="px-6 py-2.5 bg-red-800 hover:bg-red-700 rounded-lg text-sm font-semibold flex items-center gap-2"
+            className="mt-5 md:mt-0 px-6 py-2.5 w-fit bg-red-800 hover:bg-red-700 rounded-lg text-sm font-semibold flex items-center gap-2"
           >
             <FiTrash2 /> Delete Account
           </button>

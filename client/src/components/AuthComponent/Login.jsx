@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const [form, setForm] = useState({
         email: "",
@@ -23,15 +24,21 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (loading) return;
+
         try {
+            setLoading(true);
+
             const data = await loginUser(form);
-            if (data?.success == true && data?.user) {
+            if (data?.success === true && data?.user) {
                 dispatch(setAuth(data.user));
                 toast.success(data.message);
                 navigate("/dashboard");
             }
         } catch (err) {
             toast.error("Invalid Credentials");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -46,8 +53,8 @@ const Login = () => {
 
             <div className="absolute -top-20 -left-20 sm:-left-32 w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] bg-[#24cfa6]/20 blur-[80px] sm:blur-[120px] rounded-full"></div>
 
-            <Link 
-                to="/" 
+            <Link
+                to="/"
                 className="absolute left-4 sm:left-6 md:left-20 top-10 sm:top-8 md:top-20 inline-flex items-center gap-2 rounded-full border border-gray-700 bg-zinc-900 px-3 sm:px-4 py-3 text-sm text-zinc-300"
             >
                 <IoMdArrowRoundBack className="text-[#24cfa6]" />
@@ -56,7 +63,7 @@ const Login = () => {
 
             {/* Form container - responsive width */}
             <div className="w-full max-w-sm sm:max-w-md mt-8 sm:mt-0">
-            
+
                 <h1 className="text-4xl md:text-5xl font-mono text-white mb-6 sm:mb-8">Sign In</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -64,6 +71,7 @@ const Login = () => {
                         name="email"
                         placeholder="Email"
                         type="email"
+                        disabled={loading}
                         value={form.email}
                         onChange={handleChange}
                         onKeyPress={handleKeyPress}
@@ -76,6 +84,7 @@ const Login = () => {
                         name="password"
                         type="password"
                         placeholder="Password"
+                        disabled={loading}
                         value={form.password}
                         onChange={handleChange}
                         onKeyPress={handleKeyPress}
@@ -86,10 +95,23 @@ const Login = () => {
                     {/* Submit button */}
                     <button
                         type="submit"
-                        className="w-full mt-4 sm:mt-6 bg-[#24cfa6] py-3 rounded-md font-semibold text-sm sm:text-base hover:bg-[#20b895] transition"
+                        disabled={loading}
+                        className={`w-full mt-4 sm:mt-6 py-3 rounded-md font-semibold text-sm sm:text-base transition 
+        ${loading
+                                ? "bg-[#24cfa6]/60 cursor-not-allowed"
+                                : "bg-[#24cfa6] hover:bg-[#20b895]"
+                            }`}
                     >
-                        Continue
+                        {loading ? (
+                            <span className="flex items-center justify-center gap-2">
+                                <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></span>
+                                Signing in...
+                            </span>
+                        ) : (
+                            "Continue"
+                        )}
                     </button>
+
                 </form>
             </div>
 

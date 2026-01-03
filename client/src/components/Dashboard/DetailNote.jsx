@@ -49,7 +49,7 @@ const DetailNote = () => {
 
   if (loading)
     return (
-      <p className="text-gray-300 text-center mt-10">Loading...</p>
+      <p className="text-gray-300 text-center mt-30">Loading...</p>
     );
   if (error)
     return (

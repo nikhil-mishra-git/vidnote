@@ -10,6 +10,8 @@ import { setAuth } from "../../store/authSlice.js";
 const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
 
     const [form, setForm] = useState({
         name: "",
@@ -23,7 +25,11 @@ const Register = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        if (loading) return;
+
         try {
+            setLoading(true);
+
             const data = await registerUser(form);
             if (data?.success === true && data?.user) {
                 dispatch(setAuth(data.user));
@@ -32,6 +38,8 @@ const Register = () => {
             }
         } catch {
             toast.error("User already exists");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -76,10 +84,23 @@ const Register = () => {
 
                     <button
                         type="submit"
-                        className="w-full mt-4 bg-[#24cfa6] py-3 rounded-md font-semibold"
+                        disabled={loading}
+                        className={`w-full mt-4 py-3 rounded-md font-semibold transition
+        ${loading
+                                ? "bg-[#24cfa6]/60 cursor-not-allowed"
+                                : "bg-[#24cfa6] hover:bg-[#20b895]"
+                            }`}
                     >
-                        Create Account
+                        {loading ? (
+                            <span className="flex items-center justify-center gap-2">
+                                <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></span>
+                                Creating account...
+                            </span>
+                        ) : (
+                            "Create Account"
+                        )}
                     </button>
+
                 </form>
             </div>
 
