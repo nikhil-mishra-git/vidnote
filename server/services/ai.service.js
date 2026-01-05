@@ -37,6 +37,7 @@ IMPORTANT INSTRUCTIONS:
 SUMMARY:
 - Must be detailed and well explained.
 - Length: around 4–5 proper paragraphs.
+- Every paragraphs have 30+ words.
 - Explain the main idea clearly for beginners.
 
 NOTES:

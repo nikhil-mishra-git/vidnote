@@ -75,7 +75,7 @@ export const login = async (req, res) => {
                 name: user.name,
                 email: user.email,
             }
-            
+
         });
 
     } catch (error) {
@@ -105,7 +105,7 @@ export const profile = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                notes : user.generatedNotes,
+                notes: user.generatedNotes,
                 createdAt: user.createdAt
             }
         });
@@ -114,6 +114,47 @@ export const profile = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Server error"
+        });
+    }
+};
+
+/* ================= UPDATE PROFILE ================= */
+
+export const updateProfile = async (req, res) => {
+    try {
+        const { name } = req.body;
+
+        if (!name || name.trim() === "") {
+            return res.status(400).json({
+                success: false,
+                message: "Name is required",
+            });
+        }
+
+        const user = await User.findByIdAndUpdate(
+            req.user._id,
+            { name },
+            { new: true, runValidators: true }
+        ).select("-password");
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Profile updated successfully",
+            user,
+        });
+
+    } catch (error) {
+        console.error("Update Profile Error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error",
         });
     }
 };
