@@ -135,9 +135,9 @@ const DetailNote = () => {
               <FiCalendar />
               {new Date(note.createdAt).toLocaleDateString()}
             </div>
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <FiClock /> {note.duration}
-            </div>
+            </div> */}
           </div>
 
           {note.youtubeUrl && (

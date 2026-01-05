@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearAuth } from "../../store/authSlice";
 import { logoutUser } from "../../api/apiCalls";
 
-const Topbar = ({ setSidebarOpen }) => {
+const Topbar = ({ setSidebarOpen, search, setSearch }) => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -58,6 +58,8 @@ const Topbar = ({ setSidebarOpen }) => {
           />
           <input
             type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search notes..."
             className="bg-zinc-900 border border-zinc-700 pl-10 pr-4 py-2.5 sm:py-3 rounded-md w-full text-sm outline-none focus:border-[#24cfa6] transition min-w-[200px] sm:min-w-[250px] md:min-w-[300px]"
           />

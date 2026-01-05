@@ -4,7 +4,7 @@ const FeatureCard = ({ icon: Icon, title, description, children }) => {
   return (
     <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-zinc-700 transition">
       {/* Icon */}
-      <div className="w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
+      <div className="mx-auto md:mx-0 w-12 h-12 rounded-xl bg-zinc-800 flex items-center justify-center">
         <Icon className="text-[#24cfa6] text-2xl" />
       </div>
 

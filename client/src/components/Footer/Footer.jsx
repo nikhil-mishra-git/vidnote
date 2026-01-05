@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-[#101010] text-zinc-400">
@@ -18,18 +20,18 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex items-center gap-6 text-sm">
-            <a href="#features" className="hover:text-white transition">
+            <Link to="/" className="hover:text-white transition">
               Features
-            </a>
-            <a href="#how" className="hover:text-white transition">
+            </Link>
+            <Link to="/" className="hover:text-white transition">
               How it works
-            </a>
-            <a href="/login" className="hover:text-white transition">
+            </Link>
+            <Link to="/login" className="hover:text-white transition">
               Login
-            </a>
-            <a href="/register" className="hover:text-white transition">
+            </Link>
+            <Link to="/register" className="hover:text-white transition">
               Get Started
-            </a>
+            </Link>
           </div>
 
         </div>

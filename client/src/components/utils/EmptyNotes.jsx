@@ -23,7 +23,7 @@ const EmptyNotes = () => {
 
         <button
           onClick={() => navigate("/dashboard/new-note")}
-          className="inline-flex items-center gap-2 bg-[#24cfa6] text-black px-6 py-3 rounded-full text-sm hover:opacity-90 transition"
+          className="inline-flex cursor-pointer items-center gap-2 bg-[#24cfa6] text-black px-6 py-3 rounded-full text-sm hover:opacity-90 transition"
         >
           <MdOutlineNoteAdd size={18} />
           Create New Note

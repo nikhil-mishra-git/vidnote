@@ -5,6 +5,7 @@ import Topbar from "./Topbar";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   return (
     <div className="h-screen w-full flex bg-[#101010] text-white font-mono relative">
@@ -20,10 +21,14 @@ const DashboardLayout = () => {
 
       <div className="flex-1 flex flex-col relative overflow-hidden">
 
-        <Topbar setSidebarOpen={setSidebarOpen} />
+        <Topbar
+          setSidebarOpen={setSidebarOpen}
+          search={search}
+          setSearch={setSearch}
+        />
 
         <div className="flex-1 overflow-y-auto px-3 py-6">
-          <Outlet />
+          <Outlet search={search} />
         </div>
 
       </div>

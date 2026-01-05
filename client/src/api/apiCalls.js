@@ -20,6 +20,12 @@ export const getProfile = async () => {
     return res.data;
 };
 
+// Update Profile
+export const updateProfile = async (data) => {
+     const res = await axiosInstance.patch("/auth/update", data);
+    return res.data;
+}
+
 // Logout
 export const logoutUser = async () => {
     const res = await axiosInstance.post("/auth/logout");

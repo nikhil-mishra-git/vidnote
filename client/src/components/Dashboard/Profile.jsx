@@ -10,8 +10,8 @@ import toast from "react-hot-toast";
 import ConfirmDelete from "../utils/ConfirmDelete.jsx";
 
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser, deleteAccount } from "../../api/apiCalls";
-import { clearAuth } from "../../store/authSlice";
+import { logoutUser, deleteAccount, updateProfile } from "../../api/apiCalls";
+import { clearAuth, updateUser } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -32,10 +32,35 @@ const Profile = () => {
     return isNaN(date)
       ? "—"
       : date.toLocaleDateString("en-US", {
-          month: "long",
-          year: "numeric",
-        });
+        month: "long",
+        year: "numeric",
+      });
   }, [user]);
+
+  const handleUpdateProfile = async () => {
+    const trimmedName = name.replace(/\s+/g, " ").trim();
+
+    if (!trimmedName) {
+      toast.error("Name cannot be empty");
+      return;
+    }
+
+    if (trimmedName === user?.name) {
+      toast.error("No changes to update");
+      return;
+    }
+
+    try {
+      const res = await updateProfile({ name: trimmedName });
+
+      if (res?.success) {
+        toast.success(res.message || "Profile updated");
+        dispatch(updateUser({ name: trimmedName }));
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Update failed");
+    }
+  };
 
   const onLogout = async () => {
     try {
@@ -79,7 +104,7 @@ const Profile = () => {
 
         <button
           onClick={onLogout}
-          className="flex ml-[72%] mt-3 md:mt-0 md:ml-0 items-center gap-2 bg-red-600/20 border border-red-600/40 px-4 py-2 rounded-lg text-sm hover:bg-red-600/30 transition"
+          className="flex ml-[70%] mt-3 md:mt-0 md:ml-0 items-center gap-2 bg-red-600/20 border border-red-600/40 px-4 py-2 rounded-lg text-sm hover:bg-red-600/30 transition"
         >
           <FiLogOut className="text-red-400" />
           Logout
@@ -89,7 +114,7 @@ const Profile = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
         {/* LEFT */}
-        <div className="lg:col-span-2 bg-white/5 border border-white/10 rounded-2xl p-8">
+        <div className="lg:col-span-2 bg-white/5 border border-white/10 rounded-2xl p-5 md:p-8">
 
           {/* AVATAR */}
           <div className="flex items-center gap-4">
@@ -145,25 +170,26 @@ const Profile = () => {
           </div>
 
           <button
-            disabled
-            className="mt-6 px-6 py-2.5 bg-[#24cfa6]/60 text-black rounded-lg text-sm font-semibold cursor-not-allowed"
+            onClick={handleUpdateProfile}
+            className="mt-6 px-6 py-2.5 bg-[#24cfa6] hover:bg-[#1fb896] text-black rounded-lg text-sm font-semibold transition"
           >
-            Update Profile (Coming Soon)
+            Update Profile
           </button>
+
         </div>
 
         {/* RIGHT */}
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 h-fit">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 md:p-8 h-fit">
 
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <FiCalendar className="text-[#24cfa6]" /> Account Stats
           </h2>
 
-          <div className="mt-6 space-y-4">
+          <div className="mt-6 space-y-4 text-xs md:text-sm">
 
-            <Stat label="Notes Generated" value={user?.notes?.length || 0} />
-            <Stat label="MCQs Created" value={(user?.notes?.length || 0) * 5} />
-            <Stat label="Member Since" value={joined} />
+            <Stat label="Notes Generated" value={ " : " + user?.notes?.length ||" : " + 0} />
+            <Stat label="MCQs Created" value={" : " + (user?.notes?.length || " : " + 0) * 5} />
+            <Stat label="Member Since" value={" : " + joined} />
 
           </div>
         </div>

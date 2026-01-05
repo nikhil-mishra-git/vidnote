@@ -4,7 +4,7 @@ import VideoCardSkeleton from "../utils/VideoCardSkeleton";
 import { getAllNotes } from "../../api/apiCalls.js";
 import EmptyNotes from "../utils/EmptyNotes.jsx";
 
-const MyNotes = () => {
+const MyNotes = ({search}) => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +23,18 @@ const MyNotes = () => {
 
     fetchNotes();
   }, []);
+
+  const filteredNotes = notes.filter((note) => {
+  if (!search || !search.trim()) return true;
+
+  const query = search.toLowerCase();
+
+  return (
+    note.title?.toLowerCase().includes(query) ||
+    note.videoTitle?.toLowerCase().includes(query)
+  );
+});
+
 
   return (
     <div className="md:px-6 py-6">
@@ -43,13 +55,13 @@ const MyNotes = () => {
 
         {/* Real Data */}
         {!loading && notes.length > 0 &&
-          notes.map((note) => (
+          filteredNotes.map((note) => (
             <VideoCard key={note._id} note={note} />
           ))}
       </div>
 
       {/* Empty State */}
-      {!loading && notes.length === 0 && <EmptyNotes />}
+      {!loading && filteredNotes.length === 0 && <EmptyNotes />}
 
 
     </div>

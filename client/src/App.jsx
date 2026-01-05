@@ -84,11 +84,15 @@ function App() {
             {/* Protected */}
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<DashboardLayout />}>
-                <Route index element={<MyNotes />} />
-                <Route path="my-notes" element={<MyNotes />} />
+
+                <Route path="my-notes">
+                  <Route index element={<MyNotes />} />
+                  <Route path="detail-note/:id" element={<DetailNote />} />
+                </Route>
+
                 <Route path="new-note" element={<NewVideo />} />
-                <Route path="detail-note/:id" element={<DetailNote />} />
                 <Route path="profile" element={<Profile />} />
+
               </Route>
             </Route>
 

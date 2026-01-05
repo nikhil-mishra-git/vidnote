@@ -64,7 +64,7 @@ const NewVideo = () => {
             toast.success("Note created successfully");
 
             setTimeout(() => {
-                navigate(`/dashboard/detail-note/${data.data._id}`);
+                navigate(`/dashboard/my-notes/detail-note/${data.data._id}`);
             }, 600);
 
         } catch (error) {

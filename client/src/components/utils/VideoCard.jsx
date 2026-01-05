@@ -38,7 +38,7 @@ const VideoCard = ({ note }) => {
 
           {/* Action Button */}
             <button
-              onClick={() => navigate(`/dashboard/detail-note/${note._id}`)}
+              onClick={() => navigate(`/dashboard/my-notes/detail-note/${note._id}`)}
               className="flex items-center gap-1 text-[#24cfa6] text-sm px-3 py-2 cursor-pointer border border-[#24cfa6] rounded-lg hover:bg-[#24cfa6]/10 transition-all duration-300"
             >
               <FiEye /> View Notes
