@@ -21,7 +21,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <div
       className={`
         fixed md:static z-50
-        w-64 min-h-screen bg-[#101010]
+        w-64 sm:w-56 lg:w-64 min-h-screen bg-[#101010]
         border-r border-zinc-800 px-6 py-10
         transform transition-transform duration-300
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}

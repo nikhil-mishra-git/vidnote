@@ -84,6 +84,7 @@ function App() {
             {/* Protected */}
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route index element={<Navigate to="my-notes" />} />
 
                 <Route path="my-notes">
                   <Route index element={<MyNotes />} />
@@ -92,8 +93,8 @@ function App() {
 
                 <Route path="new-note" element={<NewVideo />} />
                 <Route path="profile" element={<Profile />} />
-
               </Route>
+
             </Route>
 
             <Route path="*" element={<Navigate to="/" />} />

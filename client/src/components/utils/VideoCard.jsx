@@ -14,9 +14,6 @@ const VideoCard = ({ note }) => {
           alt={note.title}
           className="w-full h-64 object-cover "
         />
-        <span className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md font-medium">
-          {note.duration}
-        </span>
       </div>
 
       {/* Content */}

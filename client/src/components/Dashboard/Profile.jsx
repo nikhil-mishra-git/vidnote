@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   FiMail,
   FiCalendar,
@@ -10,8 +10,8 @@ import toast from "react-hot-toast";
 import ConfirmDelete from "../utils/ConfirmDelete.jsx";
 
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser, deleteAccount, updateProfile } from "../../api/apiCalls";
-import { clearAuth, updateUser } from "../../store/authSlice";
+import { logoutUser, deleteAccount, updateProfile, getProfile } from "../../api/apiCalls";
+import { clearAuth, updateUser, setAuth } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -22,9 +22,23 @@ const Profile = () => {
 
   const user = useSelector((state) => state.auth.user);
 
-  React.useEffect(() => {
-    if (user?.name) setName(user.name);
-  }, [user]);
+  useEffect(() => {
+  const loadProfile = async () => {
+    try {
+      const res = await getProfile();
+      
+      if (res?.success) {
+        dispatch(setAuth(res?.user));
+      }
+    } catch (err) {
+      console.log(err); 
+    }
+  };
+
+  loadProfile();
+}, []);
+
+
 
   const joined = useMemo(() => {
     if (!user?.createdAt) return "—";
@@ -130,8 +144,8 @@ const Profile = () => {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold">{name}</h2>
-              <p className="text-gray-400 text-sm">{user.email}</p>
+              <h2 className="text-xl font-semibold">{user?.name}</h2>
+              <p className="text-gray-400 text-sm">{user?.email}</p>
             </div>
           </div>
 
@@ -146,7 +160,7 @@ const Profile = () => {
               </label>
               <input
                 type="text"
-                value={name}
+                value={user?.name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full mt-1 px-3 py-2 bg-white/5 rounded-xl border border-white/10 text-sm focus:outline-none"
               />
@@ -187,9 +201,10 @@ const Profile = () => {
 
           <div className="mt-6 space-y-4 text-xs md:text-sm">
 
-            <Stat label="Notes Generated" value={ " : " + user?.notes?.length ||" : " + 0} />
-            <Stat label="MCQs Created" value={" : " + (user?.notes?.length || " : " + 0) * 5} />
-            <Stat label="Member Since" value={" : " + joined} />
+            <Stat label="Notes Generated" value={`: ${user?.notes?.length ?? 0}`} />
+            <Stat label="MCQs Created" value={`: ${(user?.notes?.length ?? 0) * 5}`} />
+            <Stat label="Member Since" value={`: ${joined || "—"}`} />
+
 
           </div>
         </div>
