@@ -10,9 +10,7 @@ const NotesSchema = new mongoose.Schema({
     youtubeUrl: String,
     title: String,
     thumbnail: String,
-    duration: String,
-
-    transcript: String,
+    author:String,
     summary: String,
     notes: String,
 

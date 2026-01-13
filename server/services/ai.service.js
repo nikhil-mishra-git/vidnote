@@ -36,7 +36,7 @@ IMPORTANT INSTRUCTIONS:
 
 SUMMARY:
 - Must be detailed and well explained.
-- Length: around 4–5 proper paragraphs.
+- Length: around 7–8 proper paragraphs.
 - Every paragraphs have 30+ words.
 - Explain the main idea clearly for beginners.
 
@@ -46,7 +46,7 @@ NOTES:
 - Notes must be structured and easy to revise.
 
 MCQs:
-- Generate EXACTLY 5 MCQs.
+- Generate EXACTLY 7 MCQs.
 - Each MCQ must have 4 options.
 - Clearly mark the correct answer.
 - Options array length MUST be 4 only.

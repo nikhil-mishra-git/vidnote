@@ -11,7 +11,7 @@ export const generateNotes = async (req, res) => {
     const userId = req.user._id;
 
     const videoId = extractVideoId(youtubeUrl);
-    
+
     if (!videoId) {
       return res.status(400).json({ message: "Invalid YouTube URL" });
     }
@@ -22,9 +22,10 @@ export const generateNotes = async (req, res) => {
 
     const savedData = await Notes.create({
       user: userId,
-      youtubeUrl : youtubeUrl,
+      youtubeUrl: youtubeUrl,
       title: meta.title,
       thumbnail: meta.thumbnail,
+      author: meta.author,
       summary: aiData.summary,
       notes: aiData.notes,
       mcqs: aiData.mcqs,

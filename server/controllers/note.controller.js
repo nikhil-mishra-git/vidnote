@@ -97,9 +97,14 @@ export const deleteNote = async (req, res) => {
             });
         }
 
-        await User.findByIdAndUpdate(req.user._id, {
-            $pull: { generatedNotes: deletedNote._id },
-        });
+        await User.findByIdAndUpdate(
+            req.user._id,
+            {
+                $pull: { generatedNotes: deletedNote._id },
+            },
+            { new: true }
+        );
+
 
         res.status(200).json({
             success: true,
