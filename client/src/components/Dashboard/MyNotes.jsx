@@ -46,6 +46,8 @@ const MyNotes = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 
+        <div className="absolute z-0 top-40 left-30 md:left-60 w-[180px] md:w-[280px] h-[120px] md:h-[180px] bg-[#24cfa6]/20 blur-[80px] md:blur-[100px] rounded-full"></div>
+
         {loading && Array.from({ length: 6 }).map((_, i) => (
           <VideoCardSkeleton key={i} />
         ))}

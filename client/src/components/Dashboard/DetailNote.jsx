@@ -17,6 +17,7 @@ import {
   FiCalendar,
   FiExternalLink,
 } from "react-icons/fi";
+import { PiUserCircleCheckBold } from "react-icons/pi";
 
 const DetailNote = () => {
   const { id } = useParams();
@@ -135,9 +136,9 @@ const DetailNote = () => {
               <FiCalendar />
               {new Date(note.createdAt).toLocaleDateString()}
             </div>
-            {/* <div className="flex items-center gap-2">
-              <FiClock /> {note.duration}
-            </div> */}
+            <div className="flex items-center gap-2">
+              <PiUserCircleCheckBold size={20} /> {note.author}
+            </div>
           </div>
 
           {note.youtubeUrl && (

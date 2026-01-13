@@ -8,6 +8,10 @@
     outline: none;
 }
 
+button{
+  cursor: pointer;
+}
+
 body{
   background-color: #141414;
 }

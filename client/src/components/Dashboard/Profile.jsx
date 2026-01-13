@@ -29,9 +29,10 @@ const Profile = () => {
       
       if (res?.success) {
         dispatch(setAuth(res?.user));
+        setName(res?.user?.name);
       }
     } catch (err) {
-      console.log(err); 
+      console.log(err);
     }
   };
 
@@ -144,7 +145,7 @@ const Profile = () => {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold">{user?.name}</h2>
+              <h2 className="text-xl font-semibold">{name}</h2>
               <p className="text-gray-400 text-sm">{user?.email}</p>
             </div>
           </div>
@@ -160,7 +161,7 @@ const Profile = () => {
               </label>
               <input
                 type="text"
-                value={user?.name}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full mt-1 px-3 py-2 bg-white/5 rounded-xl border border-white/10 text-sm focus:outline-none"
               />
